@@ -15,22 +15,21 @@ visible: true
 
 ![Magento 2 with Varnish and Nginx as SSL termination](magento2_with_varnish_and_nginx.jpg)
 
-When you want to use Varnish together with Magento 2 there is already a Configuration Guide on how to [Configure and use Varnish](http://devdocs.magento.com/guides/v2.0/config-guide/varnish/config-varnish.html) provided by Magento. But there are two points which aren’t yet covered in the Devdocs. 
+When you want to use Varnish together with Magento 2 there is already a Configuration Guide on how to [Configure and use Varnish](http://devdocs.magento.com/guides/v2.0/config-guide/varnish/config-varnish.html) provided by Magento. But there are two points which aren’t covered in the [Devdocs](http://devdocs.magento.com/). 
 
 ## Varnish does not support SSL
-In the Devdocs it's mentioned as a known issue that you can't use Varnish together with SSL, at least not without SSL termination, but they don’t provide any further information on how to solve this issue.
+It's mentioned in the Devdocs as a known issue that you can't use Varnish together with SSL, at least not without SSL termination, but they don’t provide any further information on how to solve this issue.
 
 ## Varnish on Port 80
 The second point who bothered me is that [they do recommend](http://devdocs.magento.com/guides/v2.0/config-guide/varnish/config-varnish-configure.html#config-varnish-config-sysvcl) to use Varnish on Port 80 (the default HTTP port) so Varnish responds directly to the incoming HTTP requests and not the Webserver. 
 
 At least since end of January 2017 this is a bad idea as Chrome and Firefox will warn you that your Shop is insecure when you use HTTP. 
 
-Of course you can force Magento to use HTTPS but even then, the very first request on your Magento installation when entering the URL in your Browser is usually completed over HTTP.
+Of course you can force Magento to use HTTPS by configuration, but even then, the very first request on your Magento installation when entering the URL in your Browser is usually completed over HTTP.
 
 ## How to solve
-Let's assume that Varnish and Nginx are installed and Varnish is running on the default Port 6081 and Magento on Port 80.
-
-Start by configuring the backend for Varnish in Nginx. As suggested in the Devdocs we can use port 8080 (or any other available listen port).
+First let's assume that Varnish and Nginx are installed and Varnish is running on the default Port 6081 and Magento on Port 80.
+Now Let's start by configuring the backend for Varnish in Nginx. As suggested in the Devdocs we can use port 8080 (or any other available listen port).
 
 ### Varnish Backend
 ````bash
@@ -53,7 +52,7 @@ server {
   include include.d/magento2.conf;
 }
 ````
-As you may have noticed, there are some variables and placeholders in the nginx config. Some of them like the USER, DOMAINS and DOMAIN placeholders are depending on your server setup and can be changed to your specific needs.
+As you may have noticed, there are some variables and placeholders in the nginx config. Some of them like the **USER**, **DOMAINS** and **DOMAIN** placeholders are depending on your server setup and can be changed to your specific needs.
 
 The **MAGE_X**, **$HTTPS_FORWARD** and **$FPM_USER** specific variables are used in the `include.d/magento2.conf` file, which is basically the [nginx.conf.sample](https://github.com/magento/magento2/blob/develop/nginx.conf.sample#L163) file coming within every Magento 2 installation. In this case we extended the default configuration by a few lines, so it’s possible to define the run type and run code as well as the https forwarding.
 
