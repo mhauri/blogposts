@@ -10,6 +10,7 @@ taxonomy:
         - Nginx
         - Varnish
         - SSL
+        - Security
 visible: true
 ---
 
