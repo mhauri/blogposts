@@ -19,7 +19,7 @@ Adding a custom database connection in Magento2 seems easy at first but doing it
 
 Normally, if you want to add a new database connection in your Magento 2 project, you will tend to do only the following. That is at least what I also did in the past 😅
 
-0. Edit `app/etc/env.php` with new database connection 
+1. Edit `app/etc/env.php` with new database connection 
 
     ```
     'db' => array (
@@ -42,7 +42,7 @@ Normally, if you want to add a new database connection in your Magento 2 project
     )
     ```
 
-0. Use the new connection in your `model/resource`, or wherever you want, by specifying the custom resource connection:
+2. Use the new connection in your `model/resource`, or wherever you want, by specifying the custom resource connection:
 
     * In your Model Resources
 
@@ -64,8 +64,8 @@ Quite easy, right? After that, you get your module working with the new database
 
 If you only do that, you will face 2 issues:
 
-0. This new database connection will not be avaiable for integration tests
-1. Clean installations will crash if your module contains a setup script that uses this database. For example if you create/alter tables on this database using setup scripts.
+1. This new database connection will not be avaiable for integration tests
+2. Clean installations will crash if your module contains a setup script that uses this database. For example if you create/alter tables on this database using setup scripts.
 
 The solution to overcome these problems is to add the configuration automatically into `app/etc/env.php`, the same way as the `default_setup` is added by default in Magento2. That way, our custom database configuration will always be available for clean installations and integration tests.
 
@@ -373,12 +373,12 @@ Executing `setup:install --help` will show the new command options. The same way
 
 This has the following adventages:
 
-1.- You can now add setup scripts that affect your custom database without crashing clean installations. As `env.php` is edited during the `setup:install`, the custom database configuration is ready before the setup scripts are executed.
+1. You can now add setup scripts that affect your custom database without crashing clean installations. As `env.php` is edited during the `setup:install`, the custom database configuration is ready before the setup scripts are executed.
 
-2.- You can run integration tests that use your custom database. For that, you need to edit `dev/tests/integration/etc/install-config-mysql.php` with new options:
+2. You can run integration tests that use your custom database. For that, you need to edit `dev/tests/integration/etc/install-config-mysql.php` with new options
 
-    ```
-    return [
+	```
+  	return [
         //...
         'custom-db-host' => '<host>',
         'custom-db-user' => '<user>',
