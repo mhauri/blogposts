@@ -374,9 +374,9 @@ And we are done! Clean installations and integration tests will now include our 
 
 Executing `setup:install --help` will show the new command options. The same way, if we do a new installation, we'll see that the custom database configuration gets automatically added into the `app/etc/env.php`.
 
-This has the following adventages:
+This has the following advantages:
 
-1. You can now add setup scripts that affect your custom database without crashing clean installations. As `env.php` is edited during the `setup:install`, the custom database configuration is ready before the setup scripts are executed.
+1. You can now add setup scripts that affect your custom database without crashing clean installations. `env.php` is now edited during the `setup:install`, so your custom database configuration is ready before the setup scripts are executed.
 
 2. You can run integration tests that use your custom database. For that, you need to edit `dev/tests/integration/etc/install-config-mysql.php` with new options
 
@@ -396,4 +396,4 @@ One last tip. If you want to skip the hassle of creating this code manually, you
 mg2-codegen template:generate customDBConnection
 ```
 
-That's all. I hope this will help you when adding your custom databases. It was not so easy for me to find out the right way to do it but it was great to see that Magento2 is properly prepared for it.
+That's all. I hope this will help you when you add your custom databases. It was not so easy for me to find out the right way to do it but it was great to see that Magento2 is properly prepared for it.
