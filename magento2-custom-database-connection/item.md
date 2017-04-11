@@ -8,20 +8,26 @@ taxonomy:
     tag:
         - 'Magento 2'
         - Database
-        - Integration Tests
+        - 'Integration Tests'
+        - 'Guest Post'
 visible: true
-
+author: 
+    name: 'Juan Alonso'
+    twitter: @Jalogut
+    url: https://twitter.com/Jalogut
 ---
 
-![Magento 2 Custom Database Connection - The Right Way](custom_database_connection_image.png)
+![Magento 2 Custom Database Connection - The Right Way](custom_database_connection_image.jpg)
 
-Adding a custom database connection in Magento2 seems easy at first but doing it properly it is a bit more complicated. Here we will explain how to do it right.
+<span class="guest">This is a guest blog post by [Juan Alonso](https://twitter.com/Jalogut), he is a 2x Magento Certified Application Engineer at [Stämpfli AG](http://www.staempfli.com/leistungen/online-shops/)</span>
+
+Adding a custom database connection in Magento2 seems easy at first but doing it properly it is a bit more complicated. Here I will explain how to do it right.
 
 Normally, if you want to add a new database connection in your Magento 2 project, you will tend to do only the following. That is at least what I also did in the past 😅
 
 1. Edit `app/etc/env.php` with new database connection 
 
-    ```
+    ```php
     'db' => array (
         'connection' => array (
         	//...
@@ -46,7 +52,7 @@ Normally, if you want to add a new database connection in your Magento 2 project
 
     * In your Model Resources
 
-    ```
+    ```php
     public function __construct(Context $context, $connectionName = 'custom')
     {
         parent::__construct($context, $connectionName);
@@ -55,7 +61,7 @@ Normally, if you want to add a new database connection in your Magento 2 project
 
     * At any other place
 
-    ```
+    ```php
     /** @var Magento\Framework\App\ResourceConnection $this->resourceConnection **/
     $connection = $this->resourceConnection->getConnection('custom');
     ```
@@ -71,7 +77,7 @@ The solution to overcome these problems is to add the configuration automaticall
 
 Good news is that Magento 2 is already prepared to allow other modules to extend the default `setup:install` command, in order to execute custom actions on setup time. The key is in `Magento\Setup\Model\ConfigOptionsListCollector::collectOptionsLists`
 
-```
+```php
 /**
  * Auto discover ConfigOptionsList class and collect them.
  * These classes should reside in <module>/Setup directories.
@@ -97,9 +103,7 @@ As you can see on previous function, this `collectOptionsLists` loads all module
 
 `Vendorname\Modulename\SetupConfigOptionsList`
 
-<details>
-
-```
+```php
 <?php
 /**
  * ConfigOptionsList
@@ -267,13 +271,12 @@ class ConfigOptionsList implements ConfigOptionsListInterface
 }
 ``` 
 
-</details>
 
 Let's break down what we are doing here:
 
 1. Our class must implement `ConfigOptionsListInterface`. Checking this interface, we see that we have to implement 3 methods:
 
-    ```
+    ```php
     interface ConfigOptionsListInterface
     {
         /**
@@ -297,7 +300,7 @@ Let's break down what we are doing here:
 
 2. Implement method `getOptions()`. Here is where we specify new options that will be available when executing `install:setup`. For a new database connection we will add following options:
 
-    ```
+    ```bash
     --custom-db-host                Database host (Connection name: Custom)
     --custom-db-name                Database name (Connection name: Custom)
     --custom-db-user                Database username (Connection name: Custom)
@@ -308,7 +311,7 @@ Let's break down what we are doing here:
 
 	Each option must be type `TextConfigOption` as in the following example:
 
-    ```
+    ```php
     public function getOptions()
     {
         return [
@@ -326,7 +329,7 @@ Let's break down what we are doing here:
 
 3. Implement method `validate()`. Here we check database settings by trying to connect to the custom database. Validation will return errors if connection could not be established.
 
-    ```
+    ```php
 	public function validate(array $options, DeploymentConfig $deploymentConfig)
     {
         if (!$options[ConfigOptionsListConstants::INPUT_KEY_SKIP_DB_VALIDATION]) {
@@ -347,7 +350,7 @@ Let's break down what we are doing here:
 
 4. Implement method `createConfig()`. Finally the method that we were looking for. Here it is where we save the custom database settings into the `app/etc/env.php` configuration file:
 
-    ```
+    ```php
 	public function createConfig(array $options, DeploymentConfig $deploymentConfig)
     {
         $configData = new ConfigData(ConfigFilePool::APP_ENV);
@@ -377,7 +380,7 @@ This has the following adventages:
 
 2. You can run integration tests that use your custom database. For that, you need to edit `dev/tests/integration/etc/install-config-mysql.php` with new options
 
-	```
+	```php
   	return [
         //...
         'custom-db-host' => '<host>',
@@ -387,9 +390,9 @@ This has the following adventages:
     ];
     ```
 
-One last tip. If you want to skip the hassle of creating this code manually, you can use [magento2-code-generation](https://github.com/staempfli/magento2-code-generator) tool to generate it automatically:
+One last tip. If you want to skip the hassle of creating this code manually, you can use the [magento2-code-generation](https://github.com/staempfli/magento2-code-generator) tool to generate it automatically:
 
-```
+```bash
 mg2-codegen template:generate customDBConnection
 ```
 
