@@ -41,7 +41,7 @@ We will also expect the same result locally after installing all external depend
 
 If you simple follow the [Magento Docs](http://devdocs.magento.com/guides/v2.2/install-gde/prereq/integrator_install_ce.html), they will tell you to run:
 
-```
+```bash
 composer require magento/project-community-edition
 ``` 
 
@@ -59,7 +59,7 @@ In order to improve that, we take a slighty different approach:
 
 	For that, you only need to add `magento/` prefix path in a couple of places of your `composer.json`:
 
-	```
+	```json
   	"config": {
   		"vendor-dir": "magento/vendor"
   	},
@@ -90,7 +90,7 @@ In order to improve that, we take a slighty different approach:
 
 2. `.gitignore` is also much simpler now. You only need to ignore the `magento` folder except your project specific files inside `magento/app` and your `magento/app/etc/config.php`:
 
-	```
+	```bash
 	# Ignore all Magento code files except our code in "magento/app"
 	/magento/*
 	!/magento/app
@@ -104,7 +104,7 @@ In order to improve that, we take a slighty different approach:
 
 3. Symlink `composer.json` and `composer.lock` files inside `magento` folder. For some strange reasons, Magento console needs the `composer` files under the same directory as the Magento root files. With this setup that is no longer the case, so you need to symlink these files after the `composer install/update` commands:
 
-	```
+	```json
 	"scripts": {
    		"symlinkComposerFilesToMagentoRoot": "cd magento && ln -sf ../composer.* .",
    		"post-install-cmd": [
@@ -127,7 +127,7 @@ Great! isn't it? Now the local installation looks much cleaner and exactly the s
 ![image repo vs local](comparison.png)
 
 
-## Extra tip:
+## Extra tip
 
 If you want to be smarter, you could use a tool called [symlinker-pro](https://github.com/staempfli/symlinker-pro) for adding your symlinks after `composer install/update`. Using this tool has following advantages:
 
@@ -149,7 +149,7 @@ After applying these configurations our setup and files will look like that:
 
 ### magento.symlinks
 
-```
+```bash
 composer.json=>magento/composer.json
 composer.lock=>magento/composer.lock
 
@@ -158,7 +158,7 @@ symlinks/magento/**=>magento
 
 ### composer.json
 
-```
+```json
 {
   "name": "project/magento2-project-name",
   "description": "Magento Project Name",
@@ -236,7 +236,7 @@ symlinks/magento/**=>magento
 
 ### .gitignore
 
-```
+```bash
 .idea
 .DS_Store
 
