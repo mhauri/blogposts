@@ -70,7 +70,7 @@ Quite easy, right? After that, you get your module working with the new database
 
 If you only do that, you will face 2 issues:
 
-1. This new database connection will not be avaiable for integration tests
+1. This new database connection will not be available for integration tests
 2. Clean installations will crash if your module contains a setup script that uses this database. For example if you create/alter tables on this database using setup scripts.
 
 The solution to overcome these problems is to add the configuration automatically into `app/etc/env.php`, the same way as the `default_setup` is added by default in Magento2. That way, our custom database configuration will always be available for clean installations and integration tests.
