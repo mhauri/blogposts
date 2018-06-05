@@ -26,14 +26,14 @@ First of all I decoupled the queueing and sending part from the individual modul
 
 It also triggers a custom event called `chatconnetor_notify` on which each individual module will listen to and enrich the Notification Message with the needed Payload informations based on the module configuration.
 
-Due the fact that the Chat Connector handles nearly all logic, the individual modules now only contain the service-specific configurations and an observer which listens to the custom `chatconnector_notify` event and prepares the payload before transfering it to the [Chat Connector](https://github.com/staempfli/magento2-module-chat-connector) wich will do the rest as described above
+Due the fact that the Chat Connector handles nearly all logic, the individual modules now only contain the service-specific configurations and an observer which listens to the custom `chatconnector_notify` event and prepares the payload before transferring it to the [Chat Connector](https://github.com/staempfli/magento2-module-chat-connector) wich will do the rest as described above
 
 ![Slack / HipChat](slack_hipchat_combined.png)
 
 Another benefit is that you can install them in parallel, so if as an example your customer uses Slack and your developers use HipChat you can inform both about what's happening on the shop.
 
 ## What's next
-The current plan is to extend the documentation and adding more events like, customer registration, inform about new product reviews and so on. If you have an idea abot events which should be added I highly appreciate if you create a [Pull Request](https://github.com/staempfli/magento2-module-chat-connector/pulls).
+The current plan is to extend the documentation and adding more events like, customer registration, inform about new product reviews and so on. If you have an idea about events which should be added I highly appreciate if you create a [Pull Request](https://github.com/staempfli/magento2-module-chat-connector/pulls).
 
 ## Where to get them?
 Everything is on [GitHub](https://github.com/staempfli), so you can either download it there directly or install it via composer.

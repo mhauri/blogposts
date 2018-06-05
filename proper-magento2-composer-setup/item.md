@@ -29,7 +29,7 @@ When thinking about how to setup your Magento 2 projects, you should have the fo
 * Only the project files under version control
 * Easily identify on local installations which files belong to the repo and which ones are installed by composer
 
-These goals are very important in order to keep the repository light weight, well organised and simple for developers to know which files are under VCS.
+These goals are very important in order to keep the repository light weight, well organized and simple for developers to know which files are under VCS.
 
 That said, we will want something like in this image.
 
@@ -49,11 +49,11 @@ This configuration alone is not enough because you end up with something like th
 
 ![image wrong local setup](dev_docs_install.png)
 
-As you can see, there are lots of Magento files installed in your project root. Only the ones in the red are comming from the project repository. This solution is not valid for us because developers cannot clearly see which files are under version control and which ones where installed by composer. `.gitignore` is also quite complex as you need to ignore several individual files installed by composer out of the vendor folder.
+As you can see, there are lots of Magento files installed in your project root. Only the ones in the red are coming from the project repository. This solution is not valid for us because developers cannot clearly see which files are under version control and which ones where installed by composer. `.gitignore` is also quite complex as you need to ignore several individual files installed by composer out of the vendor folder.
 
 ## Proper Configuration
 
-In order to improve that, we take a slighty different approach:
+In order to improve that, we take a slightly different approach:
 
 1. Enclose all Magento files and dependencies under a specific folder, so they do not pollute your project root directory. In our case, we decided to call that folder `magento`.
 
@@ -132,7 +132,7 @@ Great! isn't it? Now the local installation looks much cleaner and exactly the s
 If you want to be smarter, you could use a tool called [symlinker-pro](https://github.com/staempfli/symlinker-pro) for adding your symlinks after `composer install/update`. Using this tool has following advantages:
 
 * Symlinks configuration centralized in one file
-* Possible to overwritte Magento default config files with your project specific configuration. For example:
+* Possible to overwrite Magento default config files with your project specific configuration. For example:
 	*  `magento/dev/integration/phpunit.xml`
 	*  `magento/dev/unit/phpunit.xml`
 	*  `magento/dev/tools/grunt/configs/themes.js`

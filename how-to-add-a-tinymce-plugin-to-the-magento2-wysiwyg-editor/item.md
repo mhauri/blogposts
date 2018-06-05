@@ -73,10 +73,10 @@ tinyMCE.addI18n({en:{
 })();
 
 ````
-The actuall functionality is defined in the method ```_insertTextWithBox``` where we can define how our element will be structured. For demo purposes I want to have text on left side, and a gray box with text on the right side.
+The actual functionality is defined in the method ```_insertTextWithBox``` where we can define how our element will be structured. For demo purposes I want to have text on left side, and a gray box with text on the right side.
 
 That was the easy part, now we have to add our TinyMCE plugin to the WYSIWYG Editor. 
-The current Plugins like ```magentowidget``` or ```magentovairables``` are defined by default in the ```magento2-base/lib/web/mage/adminhtml/wysiwyg/tiny_mce/setup.js``` file. As this is a core file and we don't want to overide it we have to find another way. Luckily the Magento CMS comes with a method called ```getConfig()``` which allows us to get the current WYSIWYG configuration.
+The current Plugins like ```magentowidget``` or ```magentovairables``` are defined by default in the ```magento2-base/lib/web/mage/adminhtml/wysiwyg/tiny_mce/setup.js``` file. As this is a core file and we don't want to override it we have to find another way. Luckily the Magento CMS comes with a method called ```getConfig()``` which allows us to get the current WYSIWYG configuration.
 
 ## Create a Magento Plugin
 As we know now which method to use we can hook-in with a Magento plugin by using the ```afterGetConfig()``` method.

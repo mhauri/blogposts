@@ -43,7 +43,7 @@ This means, it is also much faster to analyze information in graphical format (a
 Even extensive amounts of complicated data start to make sense when presented graphically
 because our ability to identify patterns and correlations when dealing with numbers is incredibly poorer than our ability to recognize and compare shapes.
 
-The response histogram shown above tells us that the traffic druing the night is usually lower than during the rest of the day. The same applies generally also for the weekends. But, if we look more closely, we can see that some websites and shops have a much higher traffic on the weekend.
+The response histogram shown above tells us that the traffic during the night is usually lower than during the rest of the day. The same applies generally also for the weekends. But, if we look more closely, we can see that some websites and shops have a much higher traffic on the weekend.
 
 ![Traffic on a Magento 2 shop over the weekend](weekend-traffic.jpg "Traffic on a Magento 2 shop over the weekend")
 <span class="caption">Traffic on a Magento 2 shop over the weekend</span>
