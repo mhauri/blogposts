@@ -19,7 +19,7 @@ author:
 
 ![Proper Magento 2 Composer Setup](proper_magento2_composer_setup.jpg)
 
-<span class="guest">This is a guest blog post by [Juan Alonso](https://twitter.com/Jalogut), he is a 2x Magento Certified Application Engineer at [Stämpfli AG](http://www.staempfli.com/leistungen/online-shops/)</span>
+<span class="guest">This is a guest blog post by [Juan Alonso](https://twitter.com/Jalogut), he is 4x Magento Certified and a Senior Software Engineer at [advandoo AG](https://advandoo.com)</span>
 
 ## Goals
 

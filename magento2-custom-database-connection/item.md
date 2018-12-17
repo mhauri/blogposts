@@ -19,7 +19,7 @@ author:
 
 ![Magento 2 Custom Database Connection - The Right Way](custom_database_connection_image.jpg)
 
-<span class="guest">This is a guest blog post by [Juan Alonso](https://twitter.com/Jalogut), he is a 2x Magento Certified Application Engineer at [Stämpfli AG](http://www.staempfli.com/leistungen/online-shops/)</span>
+<span class="guest">This is a guest blog post by [Juan Alonso](https://twitter.com/Jalogut), he is 4x Magento Certified and a Senior Software Engineer at [advandoo AG](https://advandoo.com)</span>
 
 Adding a custom database connection in Magento2 seems easy at first but doing it properly it is a bit more complicated. Here I will explain how to do it right.
 
